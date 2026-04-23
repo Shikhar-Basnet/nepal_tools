@@ -19,4 +19,4 @@ export default function ToolLayout({ title, description, icon, children }) {
     </div>
   )
 }
-<AdBanner slot="1234567890" />
+<AdBanner slot="2263999628" />

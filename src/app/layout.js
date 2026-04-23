@@ -5,30 +5,30 @@ import Footer from '@/components/Footer'
 import AdBanner from '@/components/AdBanner'
 
 export const metadata = {
-  metadataBase: new URL('https://nepaltools.com.np'),
+  metadataBase: new URL('https://shikharbasnet.com.np'),
   title: {
-    default: 'Nepal Tools - Free Online Calculators & Converters',
-    template: '%s | Nepal Tools',
+    default: 'Tools.NP - Free Online Calculators & Converters',
+    template: '%s | Tools.NP',
   },
   description:
     'Free online tools for Nepal: Date Converter, Age Calculator, GPA Calculator, NEPSE Share Calculator, Salary Tax, VAT, Gold Price, Land Unit Converter and more.',
   keywords: [
-    'Nepal tools', 'BS AD date converter', 'Nepal age calculator',
-    'NEPSE calculator', 'Nepal salary tax calculator', 'VAT calculator Nepal',
-    'gold price Nepal', 'Ropani Aana converter', 'GPA percent Nepal',
+    'Tools.NP', 'BS AD date converter', 'Tools.NP age calculator',
+    'NEPSE calculator', 'Tools.NP salary tax calculator', 'VAT calculator Tools.NP',
+    'gold price Tools.NP', 'Ropani Aana converter', 'GPA percent Tools.NP',
   ],
   openGraph: {
-    title: 'Nepal Tools - Free Online Calculators',
+    title: 'Tools.NP - Free Online Calculators',
     description: 'All the calculators and converters you need for Nepal.',
-    url: 'https://nepaltools.com.np',
-    siteName: 'Nepal Tools',
+    url: 'https://shikharbasnet.com.np',
+    siteName: 'Tools.NP',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     locale: 'en_NP',
     type: 'website',
   },
-  twitter: { card: 'summary_large_image', title: 'Nepal Tools' },
+  twitter: { card: 'summary_large_image', title: 'Tools.NP' },
   robots: { index: true, follow: true },
-  alternates: { canonical: 'https://nepaltools.com.np' },
+  alternates: { canonical: 'https://shikharbasnet.com.np' },
 }
 
 export default function RootLayout({ children }) {
@@ -46,7 +46,7 @@ export default function RootLayout({ children }) {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           <main className="min-h-screen">{children}</main>
-          <AdBanner slot="1234567890" />
+          <AdBanner slot="2263999628" />
           <Footer />
         </ThemeProvider>
       </body>

@@ -1,16 +1,12 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
-  compress: true,
-  images: { formats: ['image/avif', 'image/webp'] },
-  headers: async () => [
-    {
-      source: '/(.*)',
-      headers: [
-        { key: 'X-Content-Type-Options', value: 'nosniff' },
-        { key: 'X-Frame-Options', value: 'DENY' },
-        { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-      ],
-    },
-  ],
+  output: 'export',
+  images: { unoptimized: true },
+  trailingSlash: true,
+
+  // IMPORTANT: disable RSC behavior
+  experimental: {
+    appDir: true,
+  },
 }
+
 module.exports = nextConfig

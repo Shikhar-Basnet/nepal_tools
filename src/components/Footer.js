@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
           <div className="col-span-2 md:col-span-1">
-            <div className="font-display text-xl text-white font-bold mb-2">NepalTools</div>
+            <div className="font-display text-xl text-white font-bold mb-2">Tools.NP</div>
             <p className="text-sm text-gray-300">Free online tools built for Nepal. Fast, accurate, and easy to use.</p>
           </div>
           <div>
@@ -28,7 +28,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t border-gray-200 pt-6 text-center text-xs text-gray-300">
-          © {new Date().getFullYear()} NepalTools - Made with ❤️ for Nepal
+          © {new Date().getFullYear()} Tools.NP
         </div>
       </div>
     </footer>

@@ -63,28 +63,4 @@ export const tools = [
     color: 'from-yellow-300 to-orange-400',
     keywords: ['gold price Nepal', 'Tola to gram gold', 'Nepal gold calculator'],
   },
-  {
-    slug: 'land-registry',
-    title: 'Land Registry Verifier',
-    description: 'Verify land ownership, check lalpurja details, and validate plot numbers by district.',
-    icon: '🏛️',
-    color: 'from-red-400 to-rose-600',
-    keywords: ['lalpurja verify Nepal', 'land ownership check Nepal', 'jagga dharani Nepal'],
-  },
-  {
-    slug: 'agri-prices',
-    title: 'Agricultural Price Tracker',
-    description: 'Daily vegetable, fruit, and grain prices from Kalimati and major bazaars across Nepal.',
-    icon: '🌾',
-    color: 'from-lime-400 to-green-600',
-    keywords: ['Kalimati vegetable price today', 'Nepal agricultural price', 'tarkari mulo Nepal'],
-  },
-  {
-    slug: 'remittance',
-    title: 'Remittance Comparator',
-    description: 'Compare live exchange rates and fees from Western Union, IME, Prabhu, Wise and more.',
-    icon: '💸',
-    color: 'from-cyan-400 to-blue-600',
-    keywords: ['remittance Nepal compare', 'send money Nepal best rate', 'IME vs Western Union Nepal'],
-  },
 ]

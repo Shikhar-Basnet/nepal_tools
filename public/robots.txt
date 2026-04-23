@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shikharbasnet.com.np/sitemap.xml
