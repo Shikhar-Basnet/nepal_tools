@@ -1,8 +1,10 @@
 import './globals.css'
+import { Suspense } from 'react'
 import { ThemeProvider } from 'next-themes'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import Loading from '@/components/Loading'
 import AdBanner from '@/components/AdBanner'
+import Footer from '@/components/Footer'
 
 export const metadata = {
   metadataBase: new URL('https://shikharbasnet.com.np'),
@@ -35,17 +37,26 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Google AdSense */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8106368274356741"
           crossOrigin="anonymous"
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
-          <main className="min-h-screen">{children}</main>
+          <main className="min-h-screen">
+            <Suspense fallback={<Loading />}>
+              {children}
+            </Suspense>
+          </main>
           <AdBanner slot="2263999628" />
           <Footer />
         </ThemeProvider>

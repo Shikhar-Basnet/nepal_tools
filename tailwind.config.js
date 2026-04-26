@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Mukta', 'sans-serif'],
+        sans: ['Poppins', 'sans-serif'],
         display: ['"Yatra One"', 'serif'],
       },
       colors: {

@@ -1,24 +1,35 @@
 import Link from 'next/link'
 
 export default function ToolCard({ tool }) {
+  const Icon = tool.icon
+
   return (
     <Link
       href={`/${tool.slug}`}
-      className="group relative overflow-hidden rounded-2xl border border-gray-300 dark:border-gray-500 hover:border-gray-900 dark:hover:border-gray-100 bg-gray-50 dark:bg-gray-900 p-3 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+      className="group flex flex-col rounded-lg border border-[#dadce0] dark:border-[#3c4043] bg-white dark:bg-[#2d2e30] hover:shadow-[0_1px_6px_rgba(32,33,36,0.28)] dark:hover:shadow-[0_1px_6px_rgba(0,0,0,0.5)] hover:border-[#d2e3fc] dark:hover:border-[#3b78e7] transition-all duration-150 p-5 min-h-[176px] cursor-pointer"
     >
-      {/* Icon */}
-      <div className="text-2xl">{tool.icon}</div>
+      {/* Icon chip */}
+
+      <div className={`mb-4 w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${tool.iconBg}`}>
+        <Icon size={28} className={tool.iconColor} />
+      </div>
 
       {/* Title */}
-      <h2 className="font-semibold text-lg text-gray-700 dark:text-gray-200 mb-1">{tool.title}</h2>
+      <h2 className="font-medium text-[18px] leading-snug text-[#202124] dark:text-[#e8eaed] mb-1 tracking-[0.01em]">
+        {tool.title}
+      </h2>
 
       {/* Description */}
-      <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{tool.description}</p>
+      <p className="text-[14px] text-[#5f6368] dark:text-[#9aa0a6] leading-[1.5] flex-1">
+        {tool.description}
+      </p>
 
       {/* CTA */}
-      <button className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:gap-2 transition-all">
-        Use Tool →
-      </button>
+      <div className="mt-4 flex justify-end">
+        <span className="inline-flex items-center gap-1 text-[13px] font-medium text-[#1a73e8] dark:text-[#669df6] group-hover:underline">
+          Open tool
+        </span>
+      </div>
     </Link>
   )
 }
