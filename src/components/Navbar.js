@@ -1,92 +1,102 @@
 'use client'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import ThemeToggle from './ThemeToggle'
 import { useState, useEffect, useRef } from 'react'
-import { Menu, X, Search } from 'lucide-react'
+import { Menu, X, Home, Info, Mail, ChevronRight, Wrench } from 'lucide-react'
 
-const navLinks = [
-  { href: '/date-converter', label: 'Date Converter' },
-  { href: '/age-calculator', label: 'Age Calculator' },
-  { href: '/gpa-calculator', label: 'GPA Calculator' },
-  { href: '/land-converter', label: 'Land Converter' },
-  { href: '/nepse-calculator', label: 'NEPSE Calculator' },
-  { href: '/salary-tax', label: 'Salary Tax' },
-  { href: '/vat-calculator', label: 'VAT Calculator' },
-  { href: '/gold-calculator', label: 'Gold Price' },
+const primaryLinks = [
+  { href: '/',        label: 'Home',       icon: Home },
+  { href: '/about',   label: 'About Us',   icon: Info },
+  { href: '/contact', label: 'Contact Us', icon: Mail },
 ]
 
+const toolLinks = [
+  { href: '/date-converter',   label: 'Date Converter'   },
+  { href: '/age-calculator',   label: 'Age Calculator'   },
+  { href: '/gpa-calculator',   label: 'GPA Calculator'   },
+  { href: '/land-converter',   label: 'Land Converter'   },
+  { href: '/nepse-calculator', label: 'NEPSE Calculator'  },
+  { href: '/salary-tax',       label: 'Salary Tax'       },
+  { href: '/vat-calculator',   label: 'VAT Calculator'   },
+  { href: '/gold-calculator',  label: 'Gold Price'       },
+]
+
+const DURATION = 220
+
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
-  const [visible, setVisible] = useState(false) // controls CSS transition
-  const drawerRef = useRef(null)
-  const hamburgerRef = useRef(null)
-  const touchStartY = useRef(null)
-  const touchStartX = useRef(null)
-  const closeTimer = useRef(null)
+  const [open, setOpen]       = useState(false)
+  const [visible, setVisible] = useState(false)
+  const pathname              = usePathname()
+  const drawerRef             = useRef(null)
+  const hamburgerRef          = useRef(null)
+  const touchStartY           = useRef(null)
+  const touchStartX           = useRef(null)
+  const rafRef                = useRef(null)
+  const closeTimer            = useRef(null)
 
-  // Animate open: mount first, then trigger transition on next frame
+  // Exact match for '/', prefix match for everything else
+  const isActive = (href) => {
+    if (href === '/') return pathname === '/'
+    return pathname === href || pathname.startsWith(href + '/')
+  }
+
   const openDrawer = () => {
+    clearTimeout(closeTimer.current)
+    cancelAnimationFrame(rafRef.current)
     setOpen(true)
-    requestAnimationFrame(() => {
+    rafRef.current = requestAnimationFrame(() =>
       requestAnimationFrame(() => setVisible(true))
-    })
+    )
   }
 
-  // Animate close: trigger transition out, then unmount after duration
   const closeDrawer = () => {
+    cancelAnimationFrame(rafRef.current)
     setVisible(false)
-    closeTimer.current = setTimeout(() => setOpen(false), 220)
+    closeTimer.current = setTimeout(() => setOpen(false), DURATION)
   }
 
-  const toggleDrawer = () => {
-    if (open) closeDrawer()
-    else openDrawer()
-  }
+  const toggleDrawer = () => (open ? closeDrawer() : openDrawer())
 
-  useEffect(() => {
-    return () => clearTimeout(closeTimer.current)
+  useEffect(() => { if (open) closeDrawer() }, [pathname])
+  useEffect(() => () => {
+    clearTimeout(closeTimer.current)
+    cancelAnimationFrame(rafRef.current)
   }, [])
 
-  // Outside click/tap — skip if scrolling
   useEffect(() => {
     if (!open) return
-
-    const handleTouchStart = (e) => {
+    const onTouchStart = (e) => {
       touchStartY.current = e.touches[0].clientY
       touchStartX.current = e.touches[0].clientX
     }
-
-    const handleTouchEnd = (e) => {
+    const onTouchEnd = (e) => {
       if (touchStartY.current === null) return
-      const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY.current)
-      const deltaX = Math.abs(e.changedTouches[0].clientX - touchStartX.current)
-      touchStartY.current = null
-      touchStartX.current = null
-      if (deltaY > 8 || deltaX > 8) return
-      const insideDrawer = drawerRef.current?.contains(e.target)
-      const insideHamburger = hamburgerRef.current?.contains(e.target)
-      if (!insideDrawer && !insideHamburger) closeDrawer()
+      const dy = Math.abs(e.changedTouches[0].clientY - touchStartY.current)
+      const dx = Math.abs(e.changedTouches[0].clientX - touchStartX.current)
+      touchStartY.current = touchStartX.current = null
+      if (dy > 8 || dx > 8) return
+      if (!drawerRef.current?.contains(e.target) && !hamburgerRef.current?.contains(e.target))
+        closeDrawer()
     }
-
-    const handleMouseDown = (e) => {
-      const insideDrawer = drawerRef.current?.contains(e.target)
-      const insideHamburger = hamburgerRef.current?.contains(e.target)
-      if (!insideDrawer && !insideHamburger) closeDrawer()
+    const onMouseDown = (e) => {
+      if (!drawerRef.current?.contains(e.target) && !hamburgerRef.current?.contains(e.target))
+        closeDrawer()
     }
-
-    const timer = setTimeout(() => {
-      document.addEventListener('mousedown', handleMouseDown)
-      document.addEventListener('touchstart', handleTouchStart, { passive: true })
-      document.addEventListener('touchend', handleTouchEnd, { passive: true })
+    const t2 = setTimeout(() => {
+      document.addEventListener('mousedown', onMouseDown)
+      document.addEventListener('touchstart', onTouchStart, { passive: true })
+      document.addEventListener('touchend',   onTouchEnd,   { passive: true })
     }, 10)
-
     return () => {
-      clearTimeout(timer)
-      document.removeEventListener('mousedown', handleMouseDown)
-      document.removeEventListener('touchstart', handleTouchStart)
-      document.removeEventListener('touchend', handleTouchEnd)
+      clearTimeout(t2)
+      document.removeEventListener('mousedown', onMouseDown)
+      document.removeEventListener('touchstart', onTouchStart)
+      document.removeEventListener('touchend',   onTouchEnd)
     }
   }, [open])
+
+  const t = `${DURATION}ms ease-in-out`
 
   return (
     <>
@@ -95,103 +105,179 @@ export default function Navbar() {
         @media (min-width: 768px) { html { scroll-padding-top: 105px; } }
       `}</style>
 
-      <nav className="sticky top-0 z-50 bg-white dark:bg-[#202124] border-b border-[#e8eaed] dark:border-[#3c4043]">
+      {open && (
+        <div
+          aria-hidden="true"
+          onMouseDown={closeDrawer}
+          onTouchStart={closeDrawer}
+          style={{ opacity: visible ? 1 : 0, transition: `opacity ${t}` }}
+          className="fixed inset-0 z-40 md:hidden bg-black/30 backdrop-blur-[1px]"
+        />
+      )}
+
+      <nav className="sticky top-0 z-50 bg-white dark:bg-[#292a2d] border-b border-[#e8eaed] dark:border-[#404144]">
 
         {/* Main bar */}
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center gap-4">
+        <div className="max-w-7xl mx-auto px-4 h-14 flex items-center">
 
-          {/* Logo */}
-          <Link
-            href="/"
-            onClick={closeDrawer}
-            className="flex items-center shrink-0 text-[22px] font-medium text-[#202124] dark:text-[#e8eaed] hover:opacity-80 active:opacity-60 transition-opacity"
-          >
-            Tools
-            <span className="text-[#1a73e8] dark:text-[#669df6]">.NP</span>
+          <Link href="/"
+            className="shrink-0 text-[22px] font-bold text-[#202124] dark:text-[#e8eaed] hover:opacity-75 active:opacity-50 transition-opacity">
+            Tools<span className="text-[#1a73e8] dark:text-[#8ab4f8]">.NP</span>
           </Link>
 
-          {/* Divider */}
-          <div className="hidden md:block h-6 w-px bg-[#dadce0] dark:bg-[#3c4043] mx-1" />
-
-          {/* Search bar */}
-          <div className="hidden md:flex flex-1 max-w-sm items-center gap-2 h-9 px-3 rounded-full border border-[#dadce0] dark:border-[#3c4043] bg-[#f1f3f4] dark:bg-[#303134] hover:bg-white dark:hover:bg-[#3c4043] hover:border-[#1a73e8] dark:hover:border-[#669df6] focus-within:bg-white dark:focus-within:bg-[#303134] focus-within:border-[#1a73e8] dark:focus-within:border-[#669df6] focus-within:shadow-[0_0_0_2px_rgba(26,115,232,0.2)] transition-all duration-150">
-            <Search size={15} className="text-[#5f6368] dark:text-[#9aa0a6] shrink-0" />
-            <input
-              type="text"
-              placeholder="Search tools"
-              className="flex-1 bg-transparent text-[13px] text-[#202124] dark:text-[#e8eaed] placeholder-[#80868b] dark:placeholder-[#9aa0a6] outline-none"
-            />
+          {/* Desktop primary links */}
+          <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-1">
+            {primaryLinks.map(({ href, label }) => {
+              const active = isActive(href)
+              return (
+                <Link key={href} href={href}
+                  className={`relative px-4 py-2 rounded-lg text-[15px] font-medium transition-all duration-150
+                    ${active
+                      ? 'text-[#1a73e8] dark:text-[#8ab4f8] bg-[#e8f0fe] dark:bg-[#1a3a5c]'
+                      : 'text-[#3c4043] dark:text-[#bdc1c6] hover:text-[#202124] dark:hover:text-[#e8eaed] hover:bg-[#f1f3f4] dark:hover:bg-[#35363a]'
+                    }`}
+                >
+                  {label}
+                  {active && (
+                    <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-[#1a73e8] dark:bg-[#8ab4f8]" />
+                  )}
+                </Link>
+              )
+            })}
           </div>
 
           <div className="flex-1 md:hidden" />
 
-          {/* Right side */}
           <div className="flex items-center gap-1 ml-auto">
             <ThemeToggle />
-            {/* Hamburger — fixed 20×20 container, icons overlay and cross-fade */}
             <button
               ref={hamburgerRef}
               onClick={toggleDrawer}
-              className="md:hidden p-2 rounded-full text-[#5f6368] dark:text-[#9aa0a6] hover:bg-[#f1f3f4] active:bg-[#e8eaed] dark:hover:bg-[#303134] dark:active:bg-[#3c4043] transition-colors touch-manipulation"
               aria-label="Toggle menu"
               aria-expanded={open}
+              className="md:hidden relative w-8 h-8 rounded-full flex items-center justify-center touch-manipulation bg-gray-100 hover:bg-gray-200 active:bg-gray-300 dark:bg-[#35363a] dark:hover:bg-[#404144] dark:active:bg-[#4a4b4f] transition-colors duration-150"
             >
-              <span className="relative block w-5 h-5">
-                <span className={`absolute inset-0 flex items-center justify-center transition-all duration-150 ease-in-out ${open ? 'opacity-0 rotate-45 scale-75' : 'opacity-100 rotate-0 scale-100'}`}>
-                  <Menu size={20} />
-                </span>
-                <span className={`absolute inset-0 flex items-center justify-center transition-all duration-150 ease-in-out ${open ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-45 scale-75'}`}>
-                  <X size={20} />
-                </span>
+              <span aria-hidden="true" style={{
+                position: 'absolute',
+                opacity: visible ? 0 : 1,
+                transform: visible ? 'rotate(90deg) scale(0.6)' : 'rotate(0deg) scale(1)',
+                transition: `opacity ${t}, transform ${t}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <Menu size={18} />
+              </span>
+              <span aria-hidden="true" style={{
+                position: 'absolute',
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'rotate(0deg) scale(1)' : 'rotate(-90deg) scale(0.6)',
+                transition: `opacity ${t}, transform ${t}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <X size={18} />
               </span>
             </button>
           </div>
         </div>
 
-        {/* Desktop nav strip */}
-        <div className="hidden md:block border-t border-[#e8eaed] dark:border-[#3c4043] bg-white dark:bg-[#202124]">
-          <div className="max-w-7xl mx-auto px-4 flex items-center gap-1 overflow-x-auto scrollbar-none">
-            {navLinks.map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
-                prefetch={false}
-                className="shrink-0 px-3 py-2.5 text-[13px] font-medium text-[#5f6368] dark:text-[#9aa0a6] hover:text-[#1a73e8] dark:hover:text-[#669df6] hover:bg-[#f1f3f4] active:bg-[#e8f0fe] dark:hover:bg-[#303134] dark:active:bg-[#1e3a5f] rounded transition-colors whitespace-nowrap touch-manipulation"
-              >
-                {link.label}
-              </Link>
-            ))}
+        {/* Desktop tools strip */}
+        <div className="hidden md:block border-t border-[#e8eaed] dark:border-[#404144]">
+          <div className="max-w-7xl mx-auto px-4 flex items-center gap-0.5 overflow-x-auto scrollbar-none">
+            {toolLinks.map(({ href, label }) => {
+              const active = isActive(href)
+              return (
+                <Link key={href} href={href} prefetch={false}
+                  className={`relative shrink-0 px-3 py-2 text-[13px] font-medium transition-all duration-150 whitespace-nowrap touch-manipulation
+                    ${active
+                      ? 'text-[#1a73e8] dark:text-[#8ab4f8]'
+                      : 'text-[#5f6368] dark:text-[#9aa0a6] hover:text-[#202124] dark:hover:text-[#e8eaed] hover:bg-[#f1f3f4] dark:hover:bg-[#35363a] rounded-md'
+                    }`}
+                >
+                  {label}
+                  {active && (
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#1a73e8] dark:bg-[#8ab4f8] rounded-t-full" />
+                  )}
+                </Link>
+              )
+            })}
           </div>
         </div>
 
-        {/* Mobile drawer — always mounted when open=true, visibility driven by `visible` */}
+        {/* Mobile drawer */}
         {open && (
           <div
             ref={drawerRef}
-            className={`
-              md:hidden border-t border-[#e8eaed] dark:border-[#3c4043]
-              bg-white dark:bg-[#202124] px-3 py-2 flex flex-col
-              overflow-hidden
-              transition-all duration-200 ease-in-out
-              ${visible
-                ? 'max-h-[600px] opacity-100 translate-y-0'
-                : 'max-h-0 opacity-0 -translate-y-2'
-              }
-            `}
+            style={{
+              transform: visible ? 'translateX(0)' : 'translateX(100%)',
+              transition: `transform ${t}`,
+              boxShadow: '-4px 0 24px rgba(0,0,0,0.18)',
+            }}
+            className="fixed top-0 right-0 h-full w-[272px] z-50 md:hidden flex flex-col bg-white dark:bg-[#292a2d]"
           >
+            <div className="flex items-center justify-between px-3 h-14 border-b border-[#e8eaed] dark:border-[#404144] shrink-0">
+              <span className="text-[15px] font-semibold text-[#202124] dark:text-[#e8eaed] pl-1">Menu</span>
+              <div className="flex items-center gap-1">
+                <ThemeToggle />
+                <button onClick={closeDrawer} aria-label="Close menu"
+                  className="w-8 h-8 rounded-full flex items-center justify-center touch-manipulation bg-gray-100 hover:bg-gray-200 active:bg-gray-300 dark:bg-[#35363a] dark:hover:bg-[#404144] dark:active:bg-[#4a4b4f] text-[#5f6368] dark:text-[#9aa0a6] transition-colors duration-150">
+                  <X size={18} />
+                </button>
+              </div>
+            </div>
 
-            {/* Mobile links */}
-            {navLinks.map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={closeDrawer}
-                prefetch={false}
-                className="flex items-center px-3 py-3 min-h-[40px] text-[14px] font-medium text-[#202124] dark:text-[#e8eaed] rounded-lg hover:bg-[#f1f3f4] active:bg-[#e8f0fe] hover:text-[#1a73e8] active:text-[#1a73e8] dark:hover:bg-[#303134] dark:active:bg-[#1e3a5f] dark:hover:text-[#669df6] dark:active:text-[#669df6] transition-colors touch-manipulation select-none"
-              >
-                {link.label}
-              </Link>
-            ))}
+            <div className="flex-1 overflow-y-auto overscroll-contain">
+              <div className="px-3 pt-3 pb-1">
+                <p className="px-2 pb-1 text-[11px] font-semibold uppercase tracking-widest text-[#9aa0a6] dark:text-[#5f6368]">
+                  Navigate
+                </p>
+                {primaryLinks.map(({ href, label, icon: Icon }) => {
+                  const active = isActive(href)
+                  return (
+                    <Link key={href} href={href}
+                      className={`flex items-center gap-3 px-3 py-2.5 min-h-[44px] rounded-xl text-[14px] font-medium transition-colors touch-manipulation select-none mb-0.5
+                        ${active
+                          ? 'bg-[#e8f0fe] dark:bg-[#1a3a5c] text-[#1a73e8] dark:text-[#8ab4f8]'
+                          : 'text-[#3c4043] dark:text-[#bdc1c6] hover:bg-[#f1f3f4] dark:hover:bg-[#35363a] active:bg-[#e8f0fe] dark:active:bg-[#1a3a5c]'
+                        }`}
+                    >
+                      <Icon size={17} className={active ? 'text-[#1a73e8] dark:text-[#8ab4f8]' : 'text-[#5f6368] dark:text-[#9aa0a6]'} />
+                      <span className="flex-1">{label}</span>
+                      {active && <ChevronRight size={14} className="text-[#1a73e8] dark:text-[#8ab4f8]" />}
+                    </Link>
+                  )
+                })}
+              </div>
+
+              <div className="mx-4 my-2 border-t border-[#e8eaed] dark:border-[#404144]" />
+
+              <div className="px-3 pb-4">
+                <div className="flex items-center gap-1.5 px-2 pb-1">
+                  <Wrench size={11} className="text-[#9aa0a6] dark:text-[#5f6368]" />
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-[#9aa0a6] dark:text-[#5f6368]">Tools</p>
+                </div>
+                {toolLinks.map(({ href, label }) => {
+                  const active = isActive(href)
+                  return (
+                    <Link key={href} href={href} prefetch={false}
+                      className={`flex items-center gap-3 px-3 py-2.5 min-h-[44px] rounded-xl text-[14px] font-medium transition-colors touch-manipulation select-none mb-0.5
+                        ${active
+                          ? 'bg-[#e8f0fe] dark:bg-[#1a3a5c] text-[#1a73e8] dark:text-[#8ab4f8]'
+                          : 'text-[#3c4043] dark:text-[#bdc1c6] hover:bg-[#f1f3f4] dark:hover:bg-[#35363a] active:bg-[#e8f0fe] dark:active:bg-[#1a3a5c]'
+                        }`}
+                    >
+                      <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${active ? 'bg-[#1a73e8] dark:bg-[#8ab4f8]' : 'bg-[#dadce0] dark:bg-[#5f6368]'}`} />
+                      <span className="flex-1">{label}</span>
+                      {active && <ChevronRight size={14} className="text-[#1a73e8] dark:text-[#8ab4f8]" />}
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
+
+            <div className="px-5 py-3 border-t border-[#e8eaed] dark:border-[#404144] shrink-0">
+              <p className="text-[11px] text-[#9aa0a6] dark:text-[#5f6368] text-center">
+                Tools.NP · Free tools for Nepal
+              </p>
+            </div>
           </div>
         )}
       </nav>

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 
 export default function ToolCard({ tool }) {
   const Icon = tool.icon
@@ -27,7 +28,7 @@ export default function ToolCard({ tool }) {
       {/* CTA */}
       <div className="mt-4 flex justify-end">
         <span className="inline-flex items-center gap-1 text-[13px] font-medium text-[#1a73e8] dark:text-[#669df6] group-hover:underline">
-          Open tool
+          Open tool <ArrowUpRight/>
         </span>
       </div>
     </Link>
