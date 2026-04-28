@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 export default function ToolCard({ tool }) {
   const Icon = tool.icon
@@ -7,7 +7,7 @@ export default function ToolCard({ tool }) {
   return (
     <Link
       href={`/${tool.slug}`}
-      className="group flex flex-col rounded-lg border border-[#dadce0] dark:border-[#3c4043] bg-white dark:bg-[#2d2e30] hover:shadow-[0_1px_6px_rgba(32,33,36,0.28)] dark:hover:shadow-[0_1px_6px_rgba(0,0,0,0.5)] hover:border-[#d2e3fc] dark:hover:border-[#3b78e7] transition-all duration-150 p-5 min-h-[176px] cursor-pointer"
+      className="group flex flex-col rounded-lg border border-[#dadce0] dark:border-[#3c4043] bg-white dark:bg-[#343a40] hover:shadow-[0_1px_6px_rgba(32,33,36,0.28)] dark:hover:shadow-[0_1px_6px_rgba(0,0,0,0.5)] hover:border-[#d2e3fc] dark:hover:border-[#3b78e7] transition-all duration-150 p-5 min-h-[176px] cursor-pointer"
     >
       {/* Icon chip */}
 
@@ -28,7 +28,7 @@ export default function ToolCard({ tool }) {
       {/* CTA */}
       <div className="mt-4 flex justify-end">
         <span className="inline-flex items-center gap-1 text-[13px] font-medium text-[#1a73e8] dark:text-[#669df6] group-hover:underline">
-          Open tool <ArrowUpRight/>
+          Open tool <ArrowRight/>
         </span>
       </div>
     </Link>

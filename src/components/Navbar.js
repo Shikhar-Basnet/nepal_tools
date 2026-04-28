@@ -115,7 +115,7 @@ export default function Navbar() {
         />
       )}
 
-      <nav className="sticky top-0 z-50 bg-white dark:bg-[#292a2d] border-b border-[#e8eaed] dark:border-[#404144]">
+      <nav className="sticky top-0 z-50 bg-white dark:bg-[#343a40] border-b border-[#e8eaed] dark:border-[#404144]">
 
         {/* Main bar */}
         <div className="max-w-7xl mx-auto px-4 h-14 flex items-center">

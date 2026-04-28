@@ -39,7 +39,7 @@ export default function ContactPage() {
         className="block text-[13px] font-medium text-[#3c4043] dark:text-[#bdc1c6] mb-1.5">
         {label}
       </label>
-      <div className={`flex items-start gap-2.5 px-3 rounded-lg border bg-[#f8f9fa] dark:bg-[#35363a] transition-all duration-150
+      <div className={`flex items-start gap-2.5 px-3 rounded-lg border bg-[#f8f9fa] dark:bg-[#495057] transition-all duration-150
         ${error
           ? 'border-[#d93025] dark:border-[#f28b82]'
           : 'border-[#dadce0] dark:border-[#404144] focus-within:border-[#1a73e8] dark:focus-within:border-[#8ab4f8] focus-within:shadow-[0_0_0_2px_rgba(26,115,232,0.2)]'
@@ -58,8 +58,8 @@ export default function ContactPage() {
   if (status === 'success') {
     return (
       <div className="min-h-screen bg-[#f1f3f4] dark:bg-[#1a1b1e] flex items-center justify-center px-4">
-        <div className="bg-white dark:bg-[#292a2d] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-8 py-12 max-w-md w-full text-center">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#e6f4ea] dark:bg-[#0d3521] mb-5">
+        <div className="bg-white dark:bg-[#343a40] rounded-2xl border border-[#dadce0] dark:border-[#6c757d] px-8 py-12 max-w-md w-full text-center">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-green-100 dark:bg-green-900/40 mb-5">
             <CheckCircle size={28} className="text-[#1e8e3e] dark:text-[#81c995]" />
           </div>
           <h2 className="text-[20px] font-medium text-[#202124] dark:text-[#e8eaed] mb-2">
@@ -70,7 +70,7 @@ export default function ContactPage() {
           </p>
           <button
             onClick={() => { setForm({ name: '', email: '', subject: '', message: '' }); setStatus('idle') }}
-            className="px-5 py-2.5 rounded-lg border border-[#dadce0] dark:border-[#404144] text-[13px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] hover:bg-[#f1f3f4] dark:hover:bg-[#35363a] transition-colors touch-manipulation"
+            className="px-5 py-2.5 rounded-lg border border-[#dadce0] dark:border-[#6c757d] text-[13px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] hover:bg-[#f1f3f4] dark:hover:bg-[#495057] touch-manipulation"
           >
             Send another message
           </button>
@@ -80,11 +80,11 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f1f3f4] dark:bg-[#1a1b1e]">
+    <div className="min-h-screen">
       <div className="max-w-2xl mx-auto px-4 py-10">
 
         {/* Header card */}
-        <div className="bg-white dark:bg-[#292a2d] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-7 mb-5 flex gap-4 items-start">
+        <div className="bg-white dark:bg-[#343a40] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-7 mb-5 flex gap-4 items-start">
           <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 bg-[#e8f0fe] dark:bg-[#1a3a5c]">
             <Mail size={20} className="text-[#1a73e8] dark:text-[#8ab4f8]" />
           </div>
@@ -100,7 +100,7 @@ export default function ContactPage() {
         </div>
 
         {/* Form card */}
-        <div className="bg-white dark:bg-[#292a2d] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-7">
+        <div className="bg-white dark:bg-[#343a40] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-7">
           <div className="flex flex-col gap-5">
 
             {/* Name + Email row */}
@@ -184,9 +184,9 @@ export default function ContactPage() {
         </div>
 
         {/* Alt contact info */}
-        <div className="mt-5 bg-white dark:bg-[#292a2d] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-5 flex items-center gap-4">
-          <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-[#fce8e6] dark:bg-[#3c1a18]">
-            <Mail size={16} className="text-[#d93025] dark:text-[#f28b82]" />
+        <div className="mt-5 bg-white dark:bg-[#343a40] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-5 flex items-center gap-4">
+          <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-[#e8f0fe] dark:bg-[#1a3a5c]">
+            <Mail size={16} className="text-[#1a73e8] dark:text-[#8ab4f8]" />
           </div>
           <div>
             <p className="text-[13px] font-medium text-[#202124] dark:text-[#e8eaed]">

@@ -51,11 +51,11 @@ const tools = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#f1f3f4] dark:bg-[#1a1b1e]">
+    <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 py-10">
 
         {/* ── Hero card ── */}
-        <div className="bg-white dark:bg-[#292a2d] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-8 py-10 mb-5 text-center">
+        <div className="bg-white dark:bg-[#343a40] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-8 py-10 mb-5 text-center">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#e8f0fe] dark:bg-[#1a3a5c] mb-5">
             <Globe size={26} className="text-[#1a73e8] dark:text-[#8ab4f8]" />
           </div>
@@ -73,7 +73,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
           {features.map(({ icon: Icon, iconBg, iconColor, title, desc }) => (
             <div key={title}
-              className="bg-white dark:bg-[#292a2d] rounded-2xl border border-[#dadce0] dark:border-[#404144] p-6 flex gap-4">
+              className="bg-white dark:bg-[#343a40] rounded-2xl border border-[#dadce0] dark:border-[#404144] p-6 flex gap-4">
               <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${iconBg}`}>
                 <Icon size={20} className={iconColor} />
               </div>
@@ -90,7 +90,7 @@ export default function AboutPage() {
         </div>
 
         {/* ── Tools list card ── */}
-        <div className="bg-white dark:bg-[#292a2d] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-6 mb-5">
+        <div className="bg-white dark:bg-[#343a40] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-6 mb-5">
           <h2 className="text-[16px] font-medium text-[#202124] dark:text-[#e8eaed] mb-1">
             Available Tools
           </h2>
@@ -100,7 +100,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {tools.map(tool => (
               <div key={tool}
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-[#f8f9fa] dark:bg-[#35363a]">
+                className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-[#f8f9fa] dark:bg-[#495057]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#1a73e8] dark:bg-[#8ab4f8] shrink-0" />
                 <span className="text-[13px] text-[#3c4043] dark:text-[#bdc1c6] font-medium">
                   {tool}
@@ -111,7 +111,7 @@ export default function AboutPage() {
         </div>
 
         {/* ── Mission card ── */}
-        <div className="bg-white dark:bg-[#292a2d] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-6 mb-5">
+        <div className="bg-white dark:bg-[#343a40] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-6 mb-5">
           <h2 className="text-[16px] font-medium text-[#202124] dark:text-[#e8eaed] mb-3">
             Our Mission
           </h2>

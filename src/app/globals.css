@@ -1,30 +1,56 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font: 'Poppins', sans-serif;
+  --font-sans: 'Poppins', sans-serif;
   --font-display: 'Poppins', sans-serif;
-}
-html { scroll-padding-top: 68px; }
-@media (min-width: 768px) { html { scroll-padding-top: 105px; } }
 
+  /* Brand blue — Google blue scale */
+  --color-brand-50:  #e8f0fe;
+  --color-brand-100: #d2e3fc;
+  --color-brand-500: #1a73e8;
+  --color-brand-600: #1557b0;
+
+  /* Dark surface scale */
+  --color-dark-900: #0f1013;
+  --color-dark-800: #1c1d21;
+  --color-dark-700: #26272b;
+  --color-dark-600: #303236;
+  --color-dark-500: #3c3e42;
+}
+
+/* ── Scroll offset for sticky navbar ── */
+html {
+  scroll-padding-top: 68px;
+}
+@media (min-width: 768px) {
+  html { scroll-padding-top: 105px; }
+}
+
+/* ── Base layer ── */
 @layer base {
   body {
-    font-family: var(--font);
-    background-color: oklch(96.7% 0.003 264.542);
-    color:oklch(13% 0.028 261.692);
-    transition: background-color 0.3s ease;
+    font-family: var(--font-sans);
+    background-color: #f1f3f4;
+    color: #202124;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
+  /* v4 dark variant — .dark on <html> makes this fire */
   .dark body {
-    background-color: oklch(13% 0.028 261.692);
-    color: oklch(96.7% 0.003 264.542);
+    background-color: #212529;
+    color: #e8eaed;
   }
-  button, a {
-    cursor: pointer;
+
+  *, *::before, *::after {
+    border-color: #e8eaed;
   }
-  .btn-primary {
-  @apply bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold py-3 rounded-xl transition-colors;
-}
+
+  .dark *, .dark *::before, .dark *::after {
+    border-color: #2e3035;
+  }
+
+  button, a { cursor: pointer; }
 }
