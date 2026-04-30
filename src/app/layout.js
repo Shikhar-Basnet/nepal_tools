@@ -5,9 +5,13 @@ import Navbar from '@/components/Navbar'
 import Loading from '@/components/Loading'
 import AdBanner from '@/components/AdBanner'
 import Footer from '@/components/Footer'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
-  metadataBase: new URL('https://shikharbasnet.com.np'),
+  other: {
+    "google-adsense-account": "ca-pub-8106368274356741",
+  },
+  metadataBase: new URL('https://nepal-tools.vercel.app'),
   title: {
     default: 'Tools.NP - Free Online Calculators & Converters',
     template: '%s | Tools.NP',
@@ -22,7 +26,7 @@ export const metadata = {
   openGraph: {
     title: 'Tools.NP - Free Online Calculators',
     description: 'All the calculators and converters you need for Nepal.',
-    url: 'https://shikharbasnet.com.np',
+    url: 'https://nepal-tools.vercel.app',
     siteName: 'Tools.NP',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     locale: 'en_NP',
@@ -30,7 +34,7 @@ export const metadata = {
   },
   twitter: { card: 'summary_large_image', title: 'Tools.NP' },
   robots: { index: true, follow: true },
-  alternates: { canonical: 'https://shikharbasnet.com.np' },
+  alternates: { canonical: 'https://nepal-tools.vercel.app' },
 }
 
 export default function RootLayout({ children }) {
@@ -59,6 +63,7 @@ export default function RootLayout({ children }) {
           </main>
           <AdBanner slot="2263999628" />
           <Footer />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

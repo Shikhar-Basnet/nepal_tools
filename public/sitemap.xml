@@ -3,7 +3,7 @@
 
   <!-- Home -->
   <url>
-    <loc>https://shikharbasnet.com.np/</loc>
+    <loc>https://nepal-tools.vercel.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <lastmod>2026-04-23</lastmod>
@@ -11,56 +11,56 @@
 
   <!-- Tools Pages -->
   <url>
-    <loc>https://shikharbasnet.com.np/date-converter</loc>
+    <loc>https://nepal-tools.vercel.app/date-converter</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-23</lastmod>
   </url>
 
   <url>
-    <loc>https://shikharbasnet.com.np/age-calculator</loc>
+    <loc>https://nepal-tools.vercel.app/age-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-23</lastmod>
   </url>
 
   <url>
-    <loc>https://shikharbasnet.com.np/gpa-calculator</loc>
+    <loc>https://nepal-tools.vercel.app/gpa-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-23</lastmod>
   </url>
 
   <url>
-    <loc>https://shikharbasnet.com.np/land-converter</loc>
+    <loc>https://nepal-tools.vercel.app/land-converter</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-23</lastmod>
   </url>
 
   <url>
-    <loc>https://shikharbasnet.com.np/nepse-calculator</loc>
+    <loc>https://nepal-tools.vercel.app/nepse-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-23</lastmod>
   </url>
 
   <url>
-    <loc>https://shikharbasnet.com.np/salary-tax</loc>
+    <loc>https://nepal-tools.vercel.app/salary-tax</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-23</lastmod>
   </url>
 
   <url>
-    <loc>https://shikharbasnet.com.np/vat-calculator</loc>
+    <loc>https://nepal-tools.vercel.app/vat-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-23</lastmod>
   </url>
 
   <url>
-    <loc>https://shikharbasnet.com.np/gold-calculator</loc>
+    <loc>https://nepal-tools.vercel.app/gold-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-23</lastmod>

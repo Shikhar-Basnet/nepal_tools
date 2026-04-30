@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shikharbasnet.com.np/sitemap.xml
+Sitemap: https://nepal-tools.vercel.app/sitemap.xml
