@@ -6,18 +6,18 @@ export const metadata = {
   description: 'Terms and Conditions for using Tools.NP — free online tools for Nepal.',
 }
 
-const EFFECTIVE_DATE = 'April 28, 2026'
+const EFFECTIVE_DATE = 'May 08, 2026'
 const CONTACT_EMAIL  = 'shikharbasnet123@gmail.com'
 const SITE_URL       = 'https://www.shikharbasnet.com.np'
 const SITE_NAME      = 'Tools.NP'
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-[#f1f3f4] dark:bg-[#1a1b1e]">
+    <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 py-10">
 
         {/* Header */}
-        <div className="bg-white dark:bg-[#292a2d] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-8 py-8 mb-5">
+        <div className="bg-white dark:bg-[#343a40] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-8 py-8 mb-5">
           <h1 className="text-[26px] font-medium text-[#202124] dark:text-[#e8eaed] mb-1">
             Terms & Conditions
           </h1>
@@ -176,13 +176,19 @@ export default function TermsPage() {
         {/* 13 */}
         <Section id="contact-terms" title="13. Contact Us">
           <Body>If you have any questions about these Terms & Conditions, please contact us:</Body>
-          <div className="mt-3 px-4 py-3 rounded-lg bg-[#f8f9fa] dark:bg-[#35363a] text-[14px] text-[#3c4043] dark:text-[#bdc1c6]">
-            <p className="font-medium text-[#202124] dark:text-[#e8eaed]">Tools.NP</p>
-            <p>Nepal</p>
+          <div className="mt-3 px-4 py-3 rounded-lg bg-[#f8f9fa] dark:bg-[#495057] text-[14px]">
+            <p className="font-medium text-[#202124] dark:text-[#e8eaed]">Email</p>
             <a href={`mailto:${CONTACT_EMAIL}`}
               className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline">
               {CONTACT_EMAIL}
             </a>
+          </div>
+          <div className="mt-3 px-4 py-3 rounded-lg bg-[#f8f9fa] dark:bg-[#495057] text-[14px]">
+            <p className="font-medium">Phone</p>
+            <span
+              className="font-bold">
+              +977-9761522732
+            </span>
           </div>
         </Section>
 
@@ -199,7 +205,7 @@ export default function TermsPage() {
 
 function Section({ id, title, children }) {
   return (
-    <div id={id} className="bg-white dark:bg-[#292a2d] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-6 mb-4 scroll-mt-20">
+    <div id={id} className="bg-white dark:bg-[#343a40] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-6 mb-4 scroll-mt-20">
       {title && (
         <h2 className="text-[16px] font-medium text-[#202124] dark:text-[#e8eaed] mb-3 pb-3 border-b border-[#e8eaed] dark:border-[#404144]">
           {title}

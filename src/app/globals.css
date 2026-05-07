@@ -38,7 +38,6 @@ html {
     transition: background-color 0.25s ease, color 0.25s ease;
   }
 
-  /* v4 dark variant — .dark on <html> makes this fire */
   .dark body {
     background-color: #212529;
     color: #e8eaed;
@@ -53,4 +52,19 @@ html {
   }
 
   button, a { cursor: pointer; }
+
+  /* ── Reusable primary button — used across all tool calculators ── */
+  .btn-primary {
+    @apply
+      w-full
+      bg-blue-600 hover:bg-blue-700 active:bg-blue-800
+      dark:bg-blue-500 dark:hover:bg-blue-400 dark:active:bg-blue-300
+      text-white font-semibold
+      px-6 py-3
+      rounded-xl
+      transition-colors duration-150
+      cursor-pointer
+      touch-manipulation
+      select-none;
+  }
 }

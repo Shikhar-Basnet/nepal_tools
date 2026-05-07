@@ -10,7 +10,7 @@ export default function PrivacyPolicyPage() {
       <div className="max-w-4xl mx-auto px-4 py-10">
 
         {/* Header card */}
-        <div className="bg-white dark:bg-[#292a2d] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-8 py-8 mb-5">
+        <div className="bg-white dark:bg-[#343a40] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-8 py-8 mb-5">
           <h1 className="text-[26px] font-medium text-[#202124] dark:text-[#e8eaed] mb-1">
             Privacy Notice
           </h1>
@@ -133,9 +133,8 @@ export default function PrivacyPolicyPage() {
         {/* 10 */}
         <Section id="contact" title="10. How Can You Contact Us About This Notice?">
           <Body>If you have questions or comments about this notice, you may contact us by post at:</Body>
-          <div className="mt-3 px-4 py-3 rounded-lg bg-[#f8f9fa] dark:bg-[#35363a] text-[14px] text-[#3c4043] dark:text-[#bdc1c6]">
-            <p className="font-medium text-[#202124] dark:text-[#e8eaed]">Tools.NP</p>
-            <p>Nepal</p>
+          <div className="mt-3 px-4 py-3 rounded-lg bg-[#f8f9fa] dark:bg-[#495057] text-[14px] text-[#3c4043] dark:text-[#bdc1c6]">
+            <p className="font-medium text-[#202124] dark:text-[#e8eaed]">Email</p>
             <a href="mailto:shikharbasnet123@gmail.com"
               className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline">
               shikharbasnet123@gmail.com
@@ -147,11 +146,6 @@ export default function PrivacyPolicyPage() {
         <Section id="request" title="11. How Can You Review, Update, or Delete the Data We Collect From You?">
           <Body>Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, details about how we have processed it, correct inaccuracies, or delete your personal information. You may also have the right to withdraw your consent to our processing. To request to review, update, or delete your personal information, please contact us at the email above.</Body>
         </Section>
-
-        <p className="mt-6 text-center text-[12px] text-[#9aa0a6] dark:text-[#5f6368]">
-          This Privacy Policy was created using Termly's Privacy Policy Generator.
-        </p>
-
       </div>
     </div>
   )
@@ -161,7 +155,7 @@ export default function PrivacyPolicyPage() {
 
 function Section({ id, title, children }) {
   return (
-    <div id={id} className="bg-white dark:bg-[#292a2d] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-6 mb-4 scroll-mt-20">
+    <div id={id} className="bg-white dark:bg-[#343a40] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-6 mb-4 scroll-mt-20">
       {title && (
         <h2 className="text-[16px] font-medium text-[#202124] dark:text-[#e8eaed] mb-3 pb-3 border-b border-[#e8eaed] dark:border-[#404144]">
           {title}

@@ -1,7 +1,7 @@
 // app/contact/page.js
 'use client'
 import { useState } from 'react'
-import { Mail, MessageSquare, User, Send, CheckCircle, AlertCircle } from 'lucide-react'
+import { Mail, MessageSquare, User, Send, CheckCircle, AlertCircle, Phone } from 'lucide-react'
 
 export default function ContactPage() {
   const [form, setForm]     = useState({ name: '', email: '', subject: '', message: '' })
@@ -65,7 +65,7 @@ export default function ContactPage() {
           <h2 className="text-[20px] font-medium text-[#202124] dark:text-[#e8eaed] mb-2">
             Message sent!
           </h2>
-          <p className="text-[14px] text-[#5f6368] dark:text-[#9aa0a6] mb-6 leading-relaxed">
+          <p className="text-[14px] text-[#adb5bd] dark:text-[#9aa0a6] mb-6 leading-relaxed">
             Thanks for reaching out. We will get back to you as soon as possible.
           </p>
           <button
@@ -92,7 +92,7 @@ export default function ContactPage() {
             <h1 className="text-[20px] font-medium text-[#202124] dark:text-[#e8eaed] mb-1 tracking-tight">
               Contact Us
             </h1>
-            <p className="text-[14px] text-[#5f6368] dark:text-[#9aa0a6] leading-relaxed">
+            <p className="text-[14px] text-[#adb5bd] dark:text-[#9aa0a6] leading-relaxed">
               Have a question, suggestion, or found a bug? Fill out the form and
               we will get back to you shortly.
             </p>
@@ -109,8 +109,8 @@ export default function ContactPage() {
                 <input
                   id="name" name="name" type="text"
                   value={form.name} onChange={handleChange}
-                  placeholder="Shikhar Basnet"
-                  className="flex-1 py-2.5 bg-transparent text-[14px] text-[#202124] dark:text-[#e8eaed] placeholder-[#80868b] dark:placeholder-[#5f6368] outline-none"
+                  placeholder="Full name"
+                  className="flex-1 py-2.5 bg-transparent text-[14px] text-[#202124] dark:text-[#e8eaed] placeholder-[#80868b] dark:placeholder-[#adb5bd] outline-none"
                 />
               </Field>
               <Field id="email" label="Email Address" icon={Mail} error={errors.email}>
@@ -118,7 +118,7 @@ export default function ContactPage() {
                   id="email" name="email" type="email"
                   value={form.email} onChange={handleChange}
                   placeholder="you@example.com"
-                  className="flex-1 py-2.5 bg-transparent text-[14px] text-[#202124] dark:text-[#e8eaed] placeholder-[#80868b] dark:placeholder-[#5f6368] outline-none"
+                  className="flex-1 py-2.5 bg-transparent text-[14px] text-[#202124] dark:text-[#e8eaed] placeholder-[#80868b] dark:placeholder-[#adb5bd] outline-none"
                 />
               </Field>
             </div>
@@ -129,7 +129,7 @@ export default function ContactPage() {
                 id="subject" name="subject" type="text"
                 value={form.subject} onChange={handleChange}
                 placeholder="e.g. Bug report, Feature request..."
-                className="flex-1 py-2.5 bg-transparent text-[14px] text-[#202124] dark:text-[#e8eaed] placeholder-[#80868b] dark:placeholder-[#5f6368] outline-none"
+                className="flex-1 py-2.5 bg-transparent text-[14px] text-[#202124] dark:text-[#e8eaed] placeholder-[#80868b] dark:placeholder-[#adb5bd] outline-none"
               />
             </Field>
 
@@ -139,7 +139,7 @@ export default function ContactPage() {
                 className="block text-[13px] font-medium text-[#3c4043] dark:text-[#bdc1c6] mb-1.5">
                 Message
               </label>
-              <div className={`rounded-lg border bg-[#f8f9fa] dark:bg-[#35363a] transition-all duration-150
+              <div className={`rounded-lg border bg-[#f8f9fa] dark:bg-[#495057] transition-all duration-150
                 ${errors.message
                   ? 'border-[#d93025] dark:border-[#f28b82]'
                   : 'border-[#dadce0] dark:border-[#404144] focus-within:border-[#1a73e8] dark:focus-within:border-[#8ab4f8] focus-within:shadow-[0_0_0_2px_rgba(26,115,232,0.2)]'
@@ -148,7 +148,7 @@ export default function ContactPage() {
                   id="message" name="message" rows={5}
                   value={form.message} onChange={handleChange}
                   placeholder="Tell us what's on your mind..."
-                  className="w-full px-3 py-2.5 bg-transparent text-[14px] text-[#202124] dark:text-[#e8eaed] placeholder-[#80868b] dark:placeholder-[#5f6368] outline-none resize-none leading-relaxed"
+                  className="w-full px-3 py-2.5 bg-transparent text-[14px] text-[#202124] dark:text-[#e8eaed] placeholder-[#80868b] dark:placeholder-[#adb5bd] outline-none resize-none leading-relaxed"
                 />
               </div>
               {errors.message && (
@@ -156,7 +156,7 @@ export default function ContactPage() {
                   <AlertCircle size={11} /> {errors.message}
                 </p>
               )}
-              <p className="mt-1 text-[11px] text-[#80868b] dark:text-[#5f6368] text-right">
+              <p className="mt-1 text-[11px] text-[#80868b] dark:text-[#adb5bd] text-right">
                 {form.message.length} characters
               </p>
             </div>
@@ -165,7 +165,7 @@ export default function ContactPage() {
             <button
               onClick={handleSubmit}
               disabled={status === 'sending'}
-              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-[#1a73e8] dark:bg-[#8ab4f8] text-white dark:text-[#1a1b1e] text-[14px] font-medium hover:bg-[#1557b0] dark:hover:bg-[#aecbfa] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-150 touch-manipulation"
+              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-[#1a73e8] dark:bg-[#8ab4f8] text-white dark:text-[#1a1b1e] text-[14px] font-medium hover:bg-[#1557b0] dark:hover:bg-[#aecbfa] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed touch-manipulation"
             >
               {status === 'sending' ? (
                 <>
@@ -196,6 +196,19 @@ export default function ContactPage() {
               className="text-[13px] text-[#1a73e8] dark:text-[#8ab4f8] hover:underline">
               shikharbasnet123@gmail.com
             </a>
+          </div>
+        </div>
+
+        <div className="mt-5 bg-white dark:bg-[#343a40] rounded-2xl border border-[#dadce0] dark:border-[#404144] px-6 py-5 flex items-center gap-4">
+          <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-green-100 dark:bg-green-900/40">
+            <Phone size={16} className="text-green-600 dark:text-green-400" />
+          </div>
+          <div>
+            <p className="text-[13px] font-medium text-[#202124] dark:text-[#e8eaed]">
+              Phone Number <br/>
+              <span className="font-bold">9741622732</span>
+            </p>
+            
           </div>
         </div>
 

@@ -3,11 +3,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import ThemeToggle from './ThemeToggle'
 import { useState, useEffect, useRef } from 'react'
-import { Menu, X, Home, Info, Mail, ChevronRight, Wrench } from 'lucide-react'
+import { Menu, X, Home, Info, Mail, BookOpen, ChevronRight, Wrench } from 'lucide-react'
 
 const primaryLinks = [
   { href: '/',        label: 'Home',       icon: Home },
   { href: '/about',   label: 'About Us',   icon: Info },
+  { href: '/blog',    label: 'Blog',       icon: BookOpen },
   { href: '/contact', label: 'Contact Us', icon: Mail },
 ]
 

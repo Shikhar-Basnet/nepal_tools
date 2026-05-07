@@ -20,7 +20,7 @@ export default function Footer() {
             { heading: 'Tools',      items: tools.slice(0, 4).map(t => ({ label: t.title, href: `/${t.slug}` })) },
             { heading: 'More Tools', items: tools.slice(4).map(t => ({ label: t.title, href: `/${t.slug}` })) },
             { heading: 'Legal',      items: [{ label: 'Privacy Policy', href: '/privacy-policy' }, { label: 'Terms & Conditions', href: '/terms' }] },
-            { heading: 'Company',    items: [{ label: 'About Us', href: '/about' }, { label: 'Contact Us', href: '/contact' }] },
+            { heading: 'Company',    items: [{ label: 'About Us', href: '/about' }, { label: 'Blog', href: '/blog' }, { label: 'Contact Us', href: '/contact' }] },
           ].map(({ heading, items }) => (
             <div key={heading}>
               <p className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">
@@ -45,7 +45,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Tools.NP · Free tools for Nepal
           </p>
           <p className="text-[12px] text-gray-400 dark:text-gray-500">
-            Built with ❤️ in Nepal
+            Managed by Shikhar Basnet
           </p>
         </div>
       </div>
