@@ -3,7 +3,6 @@ import { Suspense } from 'react'
 import { ThemeProvider } from 'next-themes'
 import Navbar from '@/components/Navbar'
 import Loading from '@/components/Loading'
-import AdBanner from '@/components/AdBanner'
 import Footer from '@/components/Footer'
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -62,7 +61,6 @@ export default function RootLayout({ children }) {
               {children}
             </Suspense>
           </main>
-          <AdBanner slot="2263999628" />
           <Footer />
           <SpeedInsights />
         </ThemeProvider>

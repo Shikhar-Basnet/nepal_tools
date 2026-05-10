@@ -1,5 +1,6 @@
 import ToolCard from '@/components/ToolCard'
 import { tools } from '@/lib/tools'
+import AdBanner from '@/components/AdBanner'
 
 export default function Home() {
   return (
@@ -22,7 +23,7 @@ export default function Home() {
           <ToolCard key={tool.slug} tool={tool} />
         ))}
       </div>
-
+      <AdBanner slot="2263999628" />
     </div>
   )
 }

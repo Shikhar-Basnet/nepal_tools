@@ -134,14 +134,11 @@ export default function Navbar() {
                 <Link key={href} href={href}
                   className={`relative px-4 py-2 rounded-lg text-[15px] font-medium transition-all duration-150
                     ${active
-                      ? 'text-[#1a73e8] dark:text-[#8ab4f8] bg-[#e8f0fe] dark:bg-[#1a3a5c]'
-                      : 'text-[#3c4043] dark:text-[#bdc1c6] hover:text-[#202124] dark:hover:text-[#e8eaed] hover:bg-[#f1f3f4] dark:hover:bg-[#35363a]'
+                      ? 'text-[#1a73e8] dark:text-blue-300 bg-[#e8f0fe] dark:bg-blue-500/40'
+                      : 'text-[#3c4043] dark:text-[#bdc1c6] hover:text-[#202124] dark:hover:text-[#e8eaed] hover:bg-[#f1f3f4] dark:hover:bg-[#495057]'
                     }`}
                 >
                   {label}
-                  {active && (
-                    <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-[#1a73e8] dark:bg-[#8ab4f8]" />
-                  )}
                 </Link>
               )
             })}
@@ -156,7 +153,7 @@ export default function Navbar() {
               onClick={toggleDrawer}
               aria-label="Toggle menu"
               aria-expanded={open}
-              className="md:hidden relative w-8 h-8 rounded-full flex items-center justify-center touch-manipulation bg-gray-100 hover:bg-gray-200 active:bg-gray-300 dark:bg-[#35363a] dark:hover:bg-[#404144] dark:active:bg-[#4a4b4f] transition-colors duration-150"
+              className="md:hidden relative w-8 h-8 rounded-full flex items-center justify-center touch-manipulation bg-gray-100 active:bg-gray-300 dark:bg-[#495057] dark:active:bg-[#adb5bd]"
             >
               <span aria-hidden="true" style={{
                 position: 'absolute',
@@ -190,12 +187,12 @@ export default function Navbar() {
                   className={`relative shrink-0 px-3 py-2 text-[13px] font-medium transition-all duration-150 whitespace-nowrap touch-manipulation
                     ${active
                       ? 'text-[#1a73e8] dark:text-[#8ab4f8]'
-                      : 'text-[#5f6368] dark:text-[#9aa0a6] hover:text-[#202124] dark:hover:text-[#e8eaed] hover:bg-[#f1f3f4] dark:hover:bg-[#35363a] rounded-md'
+                      : 'text-[#5f6368] dark:text-[#9aa0a6] hover:text-[#202124] dark:hover:text-[#e8eaed] hover:bg-[#f1f3f4] dark:hover:bg-[#495057] rounded-md'
                     }`}
                 >
                   {label}
                   {active && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#1a73e8] dark:bg-[#8ab4f8] rounded-t-full" />
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#1a73e8] rounded-t-full" />
                   )}
                 </Link>
               )
@@ -212,14 +209,14 @@ export default function Navbar() {
               transition: `transform ${t}`,
               boxShadow: '-4px 0 24px rgba(0,0,0,0.18)',
             }}
-            className="fixed top-0 right-0 h-full w-[272px] z-50 md:hidden flex flex-col bg-white dark:bg-[#292a2d]"
+            className="fixed top-0 right-0 h-full w-[272px] z-50 md:hidden flex flex-col bg-white dark:bg-[#212529]"
           >
             <div className="flex items-center justify-between px-3 h-14 border-b border-[#e8eaed] dark:border-[#404144] shrink-0">
               <span className="text-[15px] font-semibold text-[#202124] dark:text-[#e8eaed] pl-1">Menu</span>
               <div className="flex items-center gap-1">
                 <ThemeToggle />
                 <button onClick={closeDrawer} aria-label="Close menu"
-                  className="w-8 h-8 rounded-full flex items-center justify-center touch-manipulation bg-gray-100 hover:bg-gray-200 active:bg-gray-300 dark:bg-[#35363a] dark:hover:bg-[#404144] dark:active:bg-[#4a4b4f] text-[#5f6368] dark:text-[#9aa0a6] transition-colors duration-150">
+                  className="w-8 h-8 rounded-full flex items-center justify-center touch-manipulation bg-gray-100 active:bg-gray-300 dark:bg-[#495057] dark:active:bg-[#adb5bd]">
                   <X size={18} />
                 </button>
               </div>

@@ -465,7 +465,7 @@ export default async function BlogPost({ params }) {
         </Link>
 
         {/* Article card */}
-        <article className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
+        <article className="bg-white dark:bg-[#343a40] rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
 
           {/* Header */}
           <div className="px-6 pt-7 pb-5 border-b border-gray-100 dark:border-gray-700">
@@ -512,7 +512,7 @@ export default async function BlogPost({ params }) {
             <div className="flex flex-col gap-3">
               {related.map(r => (
                 <Link key={r.slug} href={`/blog/${r.slug}`}
-                  className="group flex items-start gap-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-700 hover:shadow-sm transition-all duration-150 p-4">
+                  className="group flex items-start gap-4 bg-white dark:bg-[#343a40] rounded-xl border border-gray-200 dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-700 hover:shadow-sm transition-all duration-150 p-4">
                   <div className="flex-1 min-w-0">
                     <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mb-1.5 ${r.categoryColor}`}>
                       {r.category}

@@ -1,110 +1,55 @@
-'use client'
+import GoldCalculator from './GoldCalculator'
 
-import { useState } from 'react'
-import ToolLayout from '@/components/ToolLayout'
+export const metadata = {
+  title: 'Gold Calculator Nepal - Calculate Gold Price by Tola, Gram & Purity',
 
-export default function GoldCalculator() {
-  const GRAMS = { Tola: 11.6638, Gram: 1, Ratti: 0.1215 }
-  const purities = { '24k': 1, '22k': 22 / 24, '18k': 18 / 24, '14k': 14 / 24 }
+  description:
+    'Free Gold Calculator for Nepal. Calculate gold value instantly using Tola, Gram, or Ratti with 24K, 22K, 18K, and 14K purity rates.',
 
-  const [qty, setQty] = useState('')
-  const [unit, setUnit] = useState('Tola')
-  const [purity, setPurity] = useState('24k')
-  const [rate, setRate] = useState('')
+  keywords: [
+    'Gold Calculator Nepal',
+    'Gold price calculator',
+    'Tola gold calculator',
+    'Gold value calculator',
+    'Nepal gold calculator',
+    'Gold rate Nepal',
+    '24K gold calculator',
+    '22K gold calculator',
+    'Gold calculator in Tola',
+    'Gold calculator in grams',
+    'Ratti to Tola converter',
+    'Gold valuation tool',
+  ],
 
-  const grams = (parseFloat(qty) || 0) * GRAMS[unit]
-  const tolas = grams / 11.6638
-  const value =
-    rate ? tolas * parseFloat(rate) * purities[purity] : 0
+  alternates: {
+    canonical: 'https://nepal-tools.vercel.app/gold-calculator',
+  },
 
-  return (
-    <ToolLayout
-      title="Gold Calculator"
-      icon="🥇"
-      description="Calculate gold value in Tola, Gram, and Ratti based on purity and rate"
-    >
-      <div className="space-y-4">
+  openGraph: {
+    title: 'Gold Calculator Nepal',
+    description:
+      'Calculate gold value in Tola, Gram, and Ratti using live gold rates and purity levels.',
+    url: 'https://nepal-tools.vercel.app/gold-calculator',
+    siteName: 'Nepal Tools',
+    locale: 'en_US',
+    type: 'website',
+  },
 
-        {/* Rate input */}
-        <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-            Price per Tola (Rs.)
-          </label>
-          <input
-            type="number"
-            placeholder="e.g. 135000"
-            value={rate}
-            onChange={e => setRate(e.target.value)}
-            className="w-full mt-1 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          />
-        </div>
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gold Calculator Nepal',
+    description:
+      'Free online gold calculator for Nepal with Tola, Gram, Ratti and purity support.',
+  },
 
-        {/* Quantity + Unit */}
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-              Quantity
-            </label>
-            <input
-              type="number"
-              placeholder="2.5"
-              value={qty}
-              onChange={e => setQty(e.target.value)}
-              className="w-full mt-1 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
-            />
-          </div>
+  robots: {
+    index: true,
+    follow: true,
+  },
 
-          <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-              Unit
-            </label>
-            <select
-              value={unit}
-              onChange={e => setUnit(e.target.value)}
-              className="w-full mt-1 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
-            >
-              {Object.keys(GRAMS).map(u => (
-                <option key={u} value={u}>{u}</option>
-              ))}
-            </select>
-          </div>
-        </div>
+  category: 'finance',
+}
 
-        {/* Purity buttons */}
-        <div className="grid grid-cols-4 gap-2">
-          {Object.keys(purities).map(p => (
-            <button
-              key={p}
-              onClick={() => setPurity(p)}
-              className={`py-2 rounded-lg text-sm font-medium border transition ${
-                purity === p
-                  ? 'bg-yellow-400 text-white border-yellow-400'
-                  : 'border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300'
-              }`}
-            >
-              {p}
-            </button>
-          ))}
-        </div>
-
-        {/* Result */}
-        {value > 0 && (
-          <div className="p-5 bg-yellow-50 dark:bg-yellow-950 rounded-xl border border-yellow-200 dark:border-yellow-900 text-center">
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
-              Estimated Value
-            </p>
-
-            <p className="text-3xl font-bold text-yellow-600">
-              Rs. {value.toLocaleString('en-NP', { maximumFractionDigits: 2 })}
-            </p>
-
-            <p className="text-xs text-gray-500 mt-2">
-              {qty} {unit} = {tolas.toFixed(4)} Tola ({purity})
-            </p>
-          </div>
-        )}
-
-      </div>
-    </ToolLayout>
-  )
+export default function Page() {
+  return <GoldCalculator />
 }
