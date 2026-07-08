@@ -3,18 +3,41 @@
 import { useState } from 'react'
 import { Mail, MessageSquare, User, Send, CheckCircle, AlertCircle, Phone } from 'lucide-react'
 
+// ── Field component (defined inline to keep this file self-contained)
+const Field = ({ id, label, icon: Icon, error, children }) => (
+  <div>
+    <label htmlFor={id}
+      className="block text-[13px] font-medium text-[#3c4043] dark:text-[#bdc1c6] mb-1.5">
+      {label}
+    </label>
+    <div className={`flex items-start gap-2.5 px-3 rounded-lg border bg-[#f8f9fa] dark:bg-[#495057] transition-all duration-150
+        ${error
+        ? 'border-[#d93025] dark:border-[#f28b82]'
+        : 'border-[#dadce0] dark:border-[#404144] focus-within:border-[#1a73e8] dark:focus-within:border-[#8ab4f8] focus-within:shadow-[0_0_0_2px_rgba(26,115,232,0.2)]'
+      }`}>
+      <Icon size={15} className="text-[#80868b] dark:text-[#9aa0a6] mt-[11px] shrink-0" />
+      {children}
+    </div>
+    {error && (
+      <p className="mt-1 text-[12px] text-[#d93025] dark:text-[#f28b82] flex items-center gap-1">
+        <AlertCircle size={11} /> {error}
+      </p>
+    )}
+  </div>
+)
+
 export default function ContactPage() {
-  const [form, setForm]     = useState({ name: '', email: '', subject: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [status, setStatus] = useState('idle') // idle | sending | success | error
   const [errors, setErrors] = useState({})
 
   const validate = () => {
     const e = {}
-    if (!form.name.trim())                          e.name    = 'Name is required.'
-    if (!form.email.trim())                         e.email   = 'Email is required.'
+    if (!form.name.trim()) e.name = 'Name is required.'
+    if (!form.email.trim()) e.email = 'Email is required.'
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Enter a valid email.'
-    if (!form.subject.trim())                       e.subject = 'Subject is required.'
-    if (form.message.trim().length < 10)            e.message = 'Message must be at least 10 characters.'
+    if (!form.subject.trim()) e.subject = 'Subject is required.'
+    if (form.message.trim().length < 10) e.message = 'Message must be at least 10 characters.'
     return e
   }
 
@@ -24,36 +47,45 @@ export default function ContactPage() {
   }
 
   const handleSubmit = async () => {
-    const e = validate()
-    if (Object.keys(e).length) { setErrors(e); return }
-    setStatus('sending')
-    // Replace with your actual form endpoint (Formspree, EmailJS, etc.)
-    await new Promise(r => setTimeout(r, 1400))
-    setStatus('success')
-  }
+    const e = validate();
 
-  // ── Field component (defined inline to keep this file self-contained)
-  const Field = ({ id, label, icon: Icon, error, children }) => (
-    <div>
-      <label htmlFor={id}
-        className="block text-[13px] font-medium text-[#3c4043] dark:text-[#bdc1c6] mb-1.5">
-        {label}
-      </label>
-      <div className={`flex items-start gap-2.5 px-3 rounded-lg border bg-[#f8f9fa] dark:bg-[#495057] transition-all duration-150
-        ${error
-          ? 'border-[#d93025] dark:border-[#f28b82]'
-          : 'border-[#dadce0] dark:border-[#404144] focus-within:border-[#1a73e8] dark:focus-within:border-[#8ab4f8] focus-within:shadow-[0_0_0_2px_rgba(26,115,232,0.2)]'
-        }`}>
-        <Icon size={15} className="text-[#80868b] dark:text-[#9aa0a6] mt-[11px] shrink-0" />
-        {children}
-      </div>
-      {error && (
-        <p className="mt-1 text-[12px] text-[#d93025] dark:text-[#f28b82] flex items-center gap-1">
-          <AlertCircle size={11} /> {error}
-        </p>
-      )}
-    </div>
-  )
+    if (Object.keys(e).length) {
+      setErrors(e);
+      return;
+    }
+
+    setStatus("sending");
+
+    try {
+      const response = await fetch("http://localhost/contact.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus("success");
+        setForm({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        alert(data.message || "Failed to send message.");
+        setStatus("idle");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong.");
+      setStatus("idle");
+    }
+  };
+
 
   if (status === 'success') {
     return (
@@ -205,10 +237,10 @@ export default function ContactPage() {
           </div>
           <div>
             <p className="text-[13px] font-medium text-[#202124] dark:text-[#e8eaed]">
-              Phone Number <br/>
+              Phone Number <br />
               <span className="font-bold">9741622732</span>
             </p>
-            
+
           </div>
         </div>
 
