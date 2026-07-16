@@ -26,7 +26,7 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: 'https://nepal-tools.vercel.app/gpa-calculator',
+    canonical: 'https://shikharbasnet.com.np/gpa-calculator',
   },
 
   openGraph: {
@@ -34,7 +34,7 @@ export const metadata = {
       'GPA Calculator Nepal - GPA ↔ Percentage & SGPA Calculator',
     description:
       'Convert GPA to Percentage, Percentage to GPA, and calculate SGPA instantly with this free online GPA Calculator for Nepal students.',
-    url: 'https://nepal-tools.vercel.app/gpa-calculator',
+    url: 'https://shikharbasnet.com.np/gpa-calculator',
     siteName: 'Nepal Tools',
     locale: 'en_US',
     type: 'website',

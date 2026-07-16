@@ -57,7 +57,7 @@ export default function ContactPage() {
     setStatus("sending");
 
     try {
-      const response = await fetch("http://localhost/contact.php", {
+      const response = await fetch("/contact.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

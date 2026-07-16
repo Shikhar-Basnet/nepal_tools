@@ -4,13 +4,12 @@ import { ThemeProvider } from 'next-themes'
 import Navbar from '@/components/Navbar'
 import Loading from '@/components/Loading'
 import Footer from '@/components/Footer'
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
   other: {
     "google-adsense-account": "ca-pub-8106368274356741",
   },
-  metadataBase: new URL('https://nepal-tools.vercel.app'),
+  metadataBase: new URL('https://shikharbasnet.com.np'),
   title: {
     default: 'Tools.NP - Free Online Calculators & Converters',
     template: '%s | Tools.NP',
@@ -25,7 +24,7 @@ export const metadata = {
   openGraph: {
     title: 'Tools.NP - Free Online Calculators',
     description: 'All the calculators and converters you need for Nepal.',
-    url: 'https://nepal-tools.vercel.app',
+    url: 'https://shikharbasnet.com.np',
     siteName: 'Tools.NP',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     locale: 'en_NP',
@@ -33,7 +32,7 @@ export const metadata = {
   },
   twitter: { card: 'summary_large_image', title: 'Tools.NP' },
   robots: { index: true, follow: true },
-  alternates: { canonical: 'https://nepal-tools.vercel.app' },
+  alternates: { canonical: 'https://shikharbasnet.com.np' },
 }
 
 export default function RootLayout({ children }) {
@@ -46,6 +45,8 @@ export default function RootLayout({ children }) {
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8106368274356741"
           crossOrigin="anonymous"
         />
+        <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js" />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -54,6 +55,8 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
+        <amp-auto-ads type="adsense"
+          data-ad-client="ca-pub-8106368274356741" />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           <main className="min-h-screen">
@@ -62,7 +65,6 @@ export default function RootLayout({ children }) {
             </Suspense>
           </main>
           <Footer />
-          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

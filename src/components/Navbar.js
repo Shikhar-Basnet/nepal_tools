@@ -1,8 +1,8 @@
 'use client'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import ThemeToggle from './ThemeToggle'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useTransition } from 'react'
 import { Menu, X, Home, Info, Mail, BookOpen, ChevronRight, Wrench } from 'lucide-react'
 
 const primaryLinks = [
@@ -23,20 +23,26 @@ const toolLinks = [
   { href: '/gold-calculator',  label: 'Gold Price'       },
 ]
 
-const DURATION = 220
+const DURATION     = 220
+const LOADER_DELAY = 150 // avoid flashing the loader on instant/cached navigations
 
 export default function Navbar() {
   const [open, setOpen]       = useState(false)
   const [visible, setVisible] = useState(false)
-  const pathname              = usePathname()
-  const drawerRef             = useRef(null)
-  const hamburgerRef          = useRef(null)
-  const touchStartY           = useRef(null)
-  const touchStartX           = useRef(null)
-  const rafRef                = useRef(null)
-  const closeTimer            = useRef(null)
+  const router                = useRouter()
+  const pathname               = usePathname()
+  const [isPending, startTransition] = useTransition()
+  const [showLoader, setShowLoader]  = useState(false)
+  const [navHeight, setNavHeight]    = useState(0)
+  const loaderTimer            = useRef(null)
+  const navRef                 = useRef(null)
+  const drawerRef              = useRef(null)
+  const hamburgerRef           = useRef(null)
+  const touchStartY            = useRef(null)
+  const touchStartX            = useRef(null)
+  const rafRef                 = useRef(null)
+  const closeTimer             = useRef(null)
 
-  // Exact match for '/', prefix match for everything else
   const isActive = (href) => {
     if (href === '/') return pathname === '/'
     return pathname === href || pathname.startsWith(href + '/')
@@ -97,6 +103,58 @@ export default function Navbar() {
     }
   }, [open])
 
+  useEffect(() => {
+    if (!navRef.current) return
+    const update = () => setNavHeight(navRef.current.offsetHeight)
+    update()
+    const ro = new ResizeObserver(update)
+    ro.observe(navRef.current)
+    return () => ro.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (isPending) {
+      loaderTimer.current = setTimeout(() => setShowLoader(true), LOADER_DELAY)
+    } else {
+      clearTimeout(loaderTimer.current)
+      setShowLoader(false)
+    }
+    return () => clearTimeout(loaderTimer.current)
+  }, [isPending])
+
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (e.defaultPrevented || e.button !== 0) return
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+
+      const anchor = e.target.closest('a')
+      if (!anchor) return
+      if (anchor.hasAttribute('download') || anchor.target === '_blank') return
+
+      const href = anchor.getAttribute('href')
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return
+
+      let url
+      try { url = new URL(anchor.href, window.location.href) } catch { return }
+      if (url.origin !== window.location.origin) return
+      if (url.pathname === window.location.pathname && url.search === window.location.search) return
+
+      e.preventDefault()
+      e.stopPropagation()
+      if (open) closeDrawer()
+
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+
+      startTransition(() => {
+        router.push(url.pathname + url.search + url.hash)
+      })
+    }
+
+    document.addEventListener('click', handleClick, true) // capture phase
+    return () => document.removeEventListener('click', handleClick, true)
+  }, [router, open])
+
   const t = `${DURATION}ms ease-in-out`
 
   return (
@@ -105,6 +163,18 @@ export default function Navbar() {
         html { scroll-padding-top: 68px; }
         @media (min-width: 768px) { html { scroll-padding-top: 105px; } }
       `}</style>
+
+      {showLoader && (
+        <div
+          style={{ top: navHeight }}
+          className="fixed left-0 right-0 bottom-0 bg-[#f1f3f4] dark:bg-[#111111] flex items-center justify-center"
+        >
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-10 h-10 rounded-full border-4 border-[#e8eaed] dark:border-[#3c4043] border-t-[#1a73e8] dark:border-t-[#669df6] animate-spin" />
+            <p className="text-[13px] text-[#5f6368] dark:text-[#9aa0a6]">Loading...</p>
+          </div>
+        </div>
+      )}
 
       {open && (
         <div
@@ -116,7 +186,7 @@ export default function Navbar() {
         />
       )}
 
-      <nav className="sticky top-0 z-50 bg-white dark:bg-[#343a40] border-b border-[#e8eaed] dark:border-[#404144]">
+      <nav ref={navRef} className="sticky top-0 z-50 bg-white dark:bg-[#343a40] border-b border-[#e8eaed] dark:border-[#404144]">
 
         {/* Main bar */}
         <div className="max-w-7xl mx-auto px-4 h-14 flex items-center">

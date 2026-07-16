@@ -26,7 +26,7 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: 'https://nepal-tools.vercel.app/land-unit-converter',
+    canonical: 'https://shikharbasnet.com.np/land-unit-converter',
   },
 
   openGraph: {
@@ -34,7 +34,7 @@ export const metadata = {
       'Land Unit Converter Nepal - Ropani, Kattha, Bigha Converter',
     description:
       'Convert Nepali land measurement units including Ropani, Aana, Kattha, Bigha, Dhur, Square Feet, and Square Meter instantly online.',
-    url: 'https://nepal-tools.vercel.app/land-unit-converter',
+    url: 'https://shikharbasnet.com.np/land-unit-converter',
     siteName: 'Nepal Tools',
     locale: 'en_US',
     type: 'website',

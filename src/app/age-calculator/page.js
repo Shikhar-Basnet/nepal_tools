@@ -17,14 +17,14 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: 'https://nepal-tools.vercel.app/age-calculator',
+    canonical: 'https://shikharbasnet.com.np/age-calculator',
   },
 
   openGraph: {
     title: 'Age Calculator Nepal - Calculate Exact Age Online',
     description:
       'Find your exact age in years, months, days, weeks, hours, minutes, and seconds instantly.',
-    url: 'https://nepal-tools.vercel.app/age-calculator',
+    url: 'https://shikharbasnet.com.np/age-calculator',
     siteName: 'Nepal Tools',
     locale: 'en_US',
     type: 'website',
