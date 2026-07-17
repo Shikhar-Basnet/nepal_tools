@@ -1,7 +1,8 @@
 // app/contact/page.js
 'use client'
-import { useState } from 'react'
-import { Mail, MessageSquare, User, Send, CheckCircle, AlertCircle, Phone } from 'lucide-react'
+import { useState, useRef } from 'react'
+import Script from 'next/script'
+import { Mail, MessageSquare, User, Send, CheckCircle, AlertCircle, Phone, ShieldCheck } from 'lucide-react'
 
 // ── Field component (defined inline to keep this file self-contained)
 const Field = ({ id, label, icon: Icon, error, children }) => (
@@ -30,6 +31,24 @@ export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [status, setStatus] = useState('idle') // idle | sending | success | error
   const [errors, setErrors] = useState({})
+  const [recaptchaReady, setRecaptchaReady] = useState(false)
+  const widgetIdRef = useRef(null)
+  const recaptchaContainerRef = useRef(null)
+
+  // Render the widget once the script has loaded and the DOM node exists.
+  // grecaptcha.render() returns a widget id we need later to read the
+  // response token and to reset the checkbox after submit.
+  const handleScriptLoad = () => {
+    if (!window.grecaptcha || !recaptchaContainerRef.current || widgetIdRef.current !== null) return
+    window.grecaptcha.ready(() => {
+      widgetIdRef.current = window.grecaptcha.render(recaptchaContainerRef.current, {
+        sitekey: '6Ldcb1gtAAAAABi0P99D6WaJeC6r7pHsHzc0quGR',
+        callback: () => setErrors(p => ({ ...p, recaptcha: '' })),
+        'expired-callback': () => setErrors(p => ({ ...p, recaptcha: 'Verification expired, please check the box again.' })),
+      })
+      setRecaptchaReady(true)
+    })
+  }
 
   const validate = () => {
     const e = {}
@@ -38,7 +57,11 @@ export default function ContactPage() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Enter a valid email.'
     if (!form.subject.trim()) e.subject = 'Subject is required.'
     if (form.message.trim().length < 10) e.message = 'Message must be at least 10 characters.'
-    return e
+
+    const recaptchaToken = recaptchaReady ? window.grecaptcha?.getResponse(widgetIdRef.current) : ''
+    if (!recaptchaToken) e.recaptcha = 'Please verify you are not a robot.'
+
+    return { errors: e, recaptchaToken }
   }
 
   const handleChange = (e) => {
@@ -46,8 +69,14 @@ export default function ContactPage() {
     if (errors[e.target.name]) setErrors(p => ({ ...p, [e.target.name]: '' }))
   }
 
+  const resetRecaptcha = () => {
+    if (recaptchaReady && widgetIdRef.current !== null) {
+      window.grecaptcha.reset(widgetIdRef.current)
+    }
+  }
+
   const handleSubmit = async () => {
-    const e = validate();
+    const { errors: e, recaptchaToken } = validate();
 
     if (Object.keys(e).length) {
       setErrors(e);
@@ -62,7 +91,10 @@ export default function ContactPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        // 'g-recaptcha-response' is sent alongside the form fields so the
+        // PHP endpoint can verify it server-side with the Secret Key —
+        // see note below the code for the verification snippet.
+        body: JSON.stringify({ ...form, 'g-recaptcha-response': recaptchaToken }),
       });
 
       const data = await response.json();
@@ -75,14 +107,17 @@ export default function ContactPage() {
           subject: "",
           message: "",
         });
+        resetRecaptcha();
       } else {
         alert(data.message || "Failed to send message.");
         setStatus("idle");
+        resetRecaptcha();
       }
     } catch (error) {
       console.error(error);
       alert("Something went wrong.");
       setStatus("idle");
+      resetRecaptcha();
     }
   };
 
@@ -113,6 +148,14 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen">
+      {/* Loaded once per page; handleScriptLoad renders the widget into
+          recaptchaContainerRef the moment the script is ready. */}
+      <Script
+        src="https://www.google.com/recaptcha/api.js"
+        strategy="afterInteractive"
+        onLoad={handleScriptLoad}
+      />
+
       <div className="max-w-2xl mx-auto px-4 py-10">
 
         {/* Header card */}
@@ -191,6 +234,18 @@ export default function ContactPage() {
               <p className="mt-1 text-[11px] text-[#80868b] dark:text-[#adb5bd] text-right">
                 {form.message.length} characters
               </p>
+            </div>
+
+            {/* reCAPTCHA */}
+            <div>
+              <div className="flex justify-center sm:justify-start">
+                <div ref={recaptchaContainerRef} />
+              </div>
+              {errors.recaptcha && (
+                <p className="mt-1 text-[12px] text-[#d93025] dark:text-[#f28b82] flex items-center gap-1">
+                  <AlertCircle size={11} /> {errors.recaptcha}
+                </p>
+              )}
             </div>
 
             {/* Submit */}

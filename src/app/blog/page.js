@@ -83,7 +83,7 @@ const posts = [
     date: '2026-03-05',
     readTime: '4 min read',
     featured: false,
-    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=800&q=80',
   },
   {
     slug: 'how-to-calculate-age-in-bs',

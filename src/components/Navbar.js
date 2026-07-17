@@ -167,7 +167,7 @@ export default function Navbar() {
       {showLoader && (
         <div
           style={{ top: navHeight }}
-          className="fixed left-0 right-0 bottom-0 bg-[#f1f3f4] dark:bg-[#111111] flex items-center justify-center"
+          className="fixed left-0 right-0 bottom-0 bg-[#f1f3f4] dark:bg-[#111111] flex items-center justify-center z-1"
         >
           <div className="flex flex-col items-center gap-4">
             <div className="w-10 h-10 rounded-full border-4 border-[#e8eaed] dark:border-[#3c4043] border-t-[#1a73e8] dark:border-t-[#669df6] animate-spin" />
