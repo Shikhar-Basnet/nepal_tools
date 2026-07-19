@@ -26,7 +26,7 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: 'https://shikharbasnet.com.np/nepse-share-calculator',
+    canonical: 'https://nepal-tools.vercel.app/nepse-share-calculator',
   },
 
   openGraph: {
@@ -34,7 +34,7 @@ export const metadata = {
       'NEPSE Share Calculator Nepal - Profit & Loss Calculator',
     description:
       'Calculate NEPSE share trading profit/loss with broker commission, SEBON fee, DP charges, and CGT included.',
-    url: 'https://shikharbasnet.com.np/nepse-share-calculator',
+    url: 'https://nepal-tools.vercel.app/nepse-share-calculator',
     siteName: 'Nepal Tools',
     locale: 'en_US',
     type: 'website',

@@ -20,14 +20,14 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: 'https://shikharbasnet.com.np/date-converter',
+    canonical: 'https://nepal-tools.vercel.app/date-converter',
   },
 
   openGraph: {
     title: 'BS to AD Date Converter Nepal',
     description:
       'Convert Bikram Sambat (BS) dates to AD and AD dates to BS instantly using the accurate Nepali calendar converter.',
-    url: 'https://shikharbasnet.com.np/date-converter',
+    url: 'https://nepal-tools.vercel.app/date-converter',
     siteName: 'Nepal Tools',
     locale: 'en_US',
     type: 'website',

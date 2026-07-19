@@ -8,7 +8,7 @@ export const metadata = {
 
 const EFFECTIVE_DATE = 'May 08, 2026'
 const CONTACT_EMAIL  = 'shikharbasnet123@gmail.com'
-const SITE_URL       = 'https://www.shikharbasnet.com.np'
+const SITE_URL       = 'https://www.nepal-tools.vercel.app'
 const SITE_NAME      = 'Tools.NP'
 
 export default function TermsPage() {

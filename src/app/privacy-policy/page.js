@@ -25,7 +25,7 @@ export default function PrivacyPolicyPage() {
             This Privacy Notice for <strong className="text-[#202124] dark:text-[#e8eaed]">Tools.NP</strong> ("we," "us," or "our") describes how and why we might access, collect, store, use, and/or share ("process") your personal information when you use our services, including when you:
           </p>
           <ul className="mt-3 space-y-1.5 list-none">
-            <Li>Visit our website at <a href="https://www.shikharbasnet.com.np" className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline">https://www.shikharbasnet.com.np</a> or any website of ours that links to this Privacy Notice</Li>
+            <Li>Visit our website at <a href="https://www.nepal-tools.vercel.app" className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline">https://www.nepal-tools.vercel.app</a> or any website of ours that links to this Privacy Notice</Li>
             <Li>Use our free online tools, calculators, and informational resources — accessible without registration — which may display third-party advertisements (such as Google AdSense)</Li>
             <Li>Engage with us in other related ways, including any marketing or events</Li>
           </ul>

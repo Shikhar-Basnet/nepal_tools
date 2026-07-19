@@ -26,7 +26,7 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: 'https://shikharbasnet.com.np/salary-tax-calculator',
+    canonical: 'https://nepal-tools.vercel.app/salary-tax-calculator',
   },
 
   openGraph: {
@@ -34,7 +34,7 @@ export const metadata = {
       'Salary Tax Calculator Nepal - FY 2082/83',
     description:
       'Calculate Nepal salary tax, EPF, SSF, CIT deductions, insurance rebates, and net tax payable online instantly.',
-    url: 'https://shikharbasnet.com.np/salary-tax-calculator',
+    url: 'https://nepal-tools.vercel.app/salary-tax-calculator',
     siteName: 'Nepal Tools',
     locale: 'en_US',
     type: 'website',

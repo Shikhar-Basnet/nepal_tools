@@ -26,7 +26,7 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: 'https://shikharbasnet.com.np/vat-calculator',
+    canonical: 'https://nepal-tools.vercel.app/vat-calculator',
   },
 
   openGraph: {
@@ -34,7 +34,7 @@ export const metadata = {
       'VAT Calculator Nepal - Add & Extract 13% VAT',
     description:
       'Calculate 13% VAT instantly. Add VAT to amounts or extract VAT from VAT-inclusive prices using the Nepal VAT calculator.',
-    url: 'https://shikharbasnet.com.np/vat-calculator',
+    url: 'https://nepal-tools.vercel.app/vat-calculator',
     siteName: 'Nepal Tools',
     locale: 'en_US',
     type: 'website',

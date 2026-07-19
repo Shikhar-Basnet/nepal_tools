@@ -22,14 +22,14 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: 'https://shikharbasnet.com.np/gold-calculator',
+    canonical: 'https://nepal-tools.vercel.app/gold-calculator',
   },
 
   openGraph: {
     title: 'Gold Calculator Nepal',
     description:
       'Calculate gold value in Tola, Gram, and Ratti using live gold rates and purity levels.',
-    url: 'https://shikharbasnet.com.np/gold-calculator',
+    url: 'https://nepal-tools.vercel.app/gold-calculator',
     siteName: 'Nepal Tools',
     locale: 'en_US',
     type: 'website',
